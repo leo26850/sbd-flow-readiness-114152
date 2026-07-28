@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Smith Bros — Klaviyo Flow Readiness · July 28, 2026</title>
+<!--
+  ============================================================================
+  KLAVIYO FLOW READINESS REPORT — Smith Bros Mobile Detailing
+  ----------------------------------------------------------------------------
+  Which of the 9 SBD flows can be activated, and what each one still needs.
+  Built on the redstone/SBD report design system (see reports/weekly/TEMPLATE.html).
+
+  EVERY NUMBER HERE IS MACHINE-VERIFIED. Re-run before editing or re-publishing:
+      ~/sbd/verify-flow-readiness.sh
+  It re-reads the live account and asserts each count quoted below. If it fails,
+  the report is stale — fix the report, not the script.
+
+  HONESTY RULE: only claims verified against the live Klaviyo account (Sc4QpC).
+  Anything the API cannot confirm is labelled "unverified" in Section 6 rather
+  than asserted. See also: the flow-filter caveat.
+  ============================================================================
+-->
+<style>
+:root {
+  --bg:#faf8f5; --surface:#fffdfb; --ink:#221c16; --ink2:#5c544b; --ink3:#8a8078;
+  --line:#e9e1d6; --line2:#f2ece3; --accent:#a83226; --accent-soft:#f7e8e4;
+  --good:#0ca30c; --warn:#b57e04; --low:#d03b3b;
+  --good-bg:#e8f5e6; --warn-bg:#f7efdb; --low-bg:#fae4e4;
+  --track:#ece5da; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#1b1613; --surface:#221d18; --ink:#efe9e1; --ink2:#b5aa9d; --ink3:#877d72;
+  --line:#38302a; --line2:#2c2620; --accent:#e06a52; --accent-soft:#3a241e;
+  --good:#3dbb3d; --warn:#fab219; --low:#e05252;
+  --good-bg:#1e2f1c; --warn-bg:#332a14; --low-bg:#382020; --track:#332c25;
+} }
+:root[data-theme="dark"] {
+  --bg:#1b1613; --surface:#221d18; --ink:#efe9e1; --ink2:#b5aa9d; --ink3:#877d72;
+  --line:#38302a; --line2:#2c2620; --accent:#e06a52; --accent-soft:#3a241e;
+  --good:#3dbb3d; --warn:#fab219; --low:#e05252;
+  --good-bg:#1e2f1c; --warn-bg:#332a14; --low-bg:#382020; --track:#332c25;
+}
+:root[data-theme="light"] {
+  --bg:#faf8f5; --surface:#fffdfb; --ink:#221c16; --ink2:#5c544b; --ink3:#8a8078;
+  --line:#e9e1d6; --line2:#f2ece3; --accent:#a83226; --accent-soft:#f7e8e4;
+  --good:#0ca30c; --warn:#b57e04; --low:#d03b3b;
+  --good-bg:#e8f5e6; --warn-bg:#f7efdb; --low-bg:#fae4e4; --track:#ece5da;
+}
+* { box-sizing:border-box; }
+body { background:var(--bg); color:var(--ink); font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;
+  margin:0; padding:48px 24px 96px; -webkit-font-smoothing:antialiased; }
+.wrap { max-width:1060px; margin:0 auto; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.eyebrow { font:600 11px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+header { border-bottom:2px solid var(--ink); padding-bottom:24px; margin-bottom:8px; }
+h1 { font-size:clamp(26px,4vw,38px); font-weight:750; letter-spacing:-.02em; line-height:1.12;
+  margin:10px 0 14px; text-wrap:balance; }
+.meta { display:flex; flex-wrap:wrap; gap:8px; }
+.meta span { font:500 12px/1 var(--mono); color:var(--ink2); background:var(--line2);
+  border:1px solid var(--line); border-radius:99px; padding:6px 12px; }
+section { margin-top:52px; }
+h2 { font-size:21px; font-weight:700; letter-spacing:-.01em; margin:6px 0 4px; }
+.sechead { border-top:1px solid var(--line); padding-top:18px; }
+.sub { color:var(--ink2); margin:0 0 18px; max-width:70ch; }
+.count { font:600 12px var(--mono); color:var(--ink3); margin-left:8px; }
+.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:24px; }
+.tile { background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:14px 16px 12px; }
+.tile .n { font:600 28px/1.1 var(--mono); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+.tile .l { font:600 11px/1.3 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ink3); margin-top:6px; }
+.tile .s { font-size:12px; color:var(--ink2); margin-top:5px; }
+.tile .dot { display:inline-block; width:8px; height:8px; border-radius:99px; margin-right:6px; vertical-align:1px; }
+.lead { font-size:16px; color:var(--ink); max-width:72ch; }
+.lead strong { color:var(--accent); }
+.callout { background:var(--accent-soft); border:1px solid var(--line); border-left:3px solid var(--accent);
+  border-radius:6px; padding:15px 18px; margin-top:20px; font-size:14px; color:var(--ink); max-width:80ch; }
+.callout b { color:var(--accent); }
+
+/* tables */
+.tablewrap { overflow-x:auto; background:var(--surface); border:1px solid var(--line); border-radius:6px; margin-top:16px; }
+table { border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px; }
+th { font:600 11px/1.2 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ink3);
+  text-align:left; padding:12px 14px 9px; border-bottom:1px solid var(--line); white-space:nowrap; }
+td { padding:10px 14px; border-bottom:1px solid var(--line2); vertical-align:top; }
+td.num { font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap; }
+td .fid { display:block; font:600 11px var(--mono); color:var(--ink3); margin-top:3px; }
+tbody tr:last-child td { border-bottom:none; }
+tbody tr:hover td { background:var(--line2); }
+.tag { font:700 10px/1 var(--mono); letter-spacing:.04em; text-transform:uppercase; padding:4px 7px; border-radius:4px; white-space:nowrap; }
+.tag-on { background:var(--good-bg); color:var(--good); }
+.tag-off { background:var(--low-bg); color:var(--low); }
+.tag-mid { background:var(--warn-bg); color:var(--warn); }
+.pill { font:700 10.5px/1 var(--mono); letter-spacing:.06em; text-transform:uppercase; padding:6px 9px; border-radius:99px; white-space:nowrap; }
+.pill-done { background:var(--good-bg); color:var(--good); }
+.pill-prog { background:var(--warn-bg); color:var(--warn); }
+.pill-next { background:var(--line2); color:var(--ink3); }
+code { font-family:var(--mono); font-size:.92em; background:var(--line2); border:1px solid var(--line);
+  border-radius:4px; padding:1px 5px; }
+
+/* cards */
+.cards { display:grid; grid-template-columns:1fr; gap:11px; margin-top:20px; }
+.card { background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent);
+  border-radius:6px; padding:15px 18px; }
+.card .h { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.card .h .t { font-weight:700; font-size:15px; }
+.card .h .id { font:600 11px var(--mono); color:var(--ink3); }
+.card p { margin:8px 0 0; color:var(--ink2); font-size:13.5px; max-width:82ch; }
+.card.next { border-left-color:var(--ink3); }
+.card.stop { border-left-color:var(--low); }
+
+ul.plain { margin:16px 0 0; padding-left:20px; color:var(--ink2); }
+ul.plain li { margin-bottom:8px; }
+ul.plain b { color:var(--ink); }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-top:20px; }
+.mini { background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:14px 16px; }
+.mini h4 { margin:0 0 8px; font:600 11px var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ink3); }
+.mini ul { margin:0; padding-left:17px; font-size:13.5px; color:var(--ink2); }
+.mini li { margin-bottom:6px; }
+@media (max-width:640px){ .two { grid-template-columns:1fr; } }
+footer { margin-top:64px; border-top:1px solid var(--line); padding-top:20px; font-size:12.5px; color:var(--ink3); max-width:78ch; }
+footer b { color:var(--ink2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Klaviyo Flow Readiness · Smith Bros Mobile Detailing</div>
+  <h1>Which flows are ready to go live, and what the rest still need</h1>
+  <div class="meta">
+    <span>Prepared by Kas &amp; Co</span>
+    <span>Audited 28 July 2026</span>
+    <span>Account Sc4QpC</span>
+    <span>9 SBD flows · all draft</span>
+  </div>
+</header>
+
+<section style="margin-top:34px">
+  <p class="lead">Nine SBD flows exist. <strong>Three are ready to activate</strong>, four need copy fixes
+  first, and two are blocked by something no amount of copy work will solve. Every flow is still in
+  <b>draft</b>, so none of the problems below has ever reached a customer.</p>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="n">3</div>
+      <div class="l"><span class="dot" style="background:var(--good)"></span>Ready</div>
+      <div class="s">Content clean; needs an exit rule set</div>
+    </div>
+    <div class="tile">
+      <div class="n">4</div>
+      <div class="l"><span class="dot" style="background:var(--warn)"></span>Need adjusting</div>
+      <div class="s">Dead buttons or broken variables</div>
+    </div>
+    <div class="tile">
+      <div class="n">2</div>
+      <div class="l"><span class="dot" style="background:var(--low)"></span>Blocked</div>
+      <div class="s">Missing data, not missing copy</div>
+    </div>
+    <div class="tile">
+      <div class="n">12<span style="font-size:16px;color:var(--ink3)"> / 27</span></div>
+      <div class="l">Messages with a defect</div>
+      <div class="s">Across 6 of the 9 flows</div>
+    </div>
+    <div class="tile">
+      <div class="n">0</div>
+      <div class="l">Sent to a customer</div>
+      <div class="s">Every flow is still draft</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Why fixes that were already made didn't take.</b> When a message is added to a flow, Klaviyo
+    <em>clones</em> the template and the flow keeps its own private copy. Editing the original
+    afterwards changes nothing the flow sends. Earlier fix passes edited the originals — those are
+    now clean, all 25 of them — but the flow copies, which are the ones that actually go out, still
+    carry the old broken content. That single mechanic explains every defect in this report.
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Section 1 · Green light</div>
+    <h2>Ready to go live<span class="count">3 flows</span></h2>
+  </div>
+  <p class="sub">Content is verified clean in the copy that actually sends — no dead links, no
+  variables that render blank, brand name correct. Each still needs an exit rule so people stop
+  receiving the sequence once they've acted.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Flow</th><th>Status</th><th>Before switching on</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>SBD - Sunset and Re-permission</b><span class="fid">SF9vm6 · list-triggered</span></td>
+        <td><span class="tag tag-on">clean</span></td>
+        <td>Exit rule (came-back-and-engaged). The disengagement window has already been widened from
+        90 to 150 days and reads back correctly — 2,608 profiles. Also needs the
+        <b>keep-subscribed confirmation page</b>, which doesn't exist yet; today the button has
+        nowhere to land.</td>
+      </tr>
+      <tr>
+        <td><b>SBD - Weekly Flash Takeover</b><span class="fid">U8yB9P · list-triggered</span></td>
+        <td><span class="tag tag-on">clean</span></td>
+        <td>Exit rule only (don't promote someone mid-job). Links verified real.</td>
+      </tr>
+      <tr>
+        <td><b>SBD - Service Cross-sell</b><span class="fid">XCqfUN · Service&nbsp;Completed</span></td>
+        <td><span class="tag tag-on">clean</span></td>
+        <td>Exit rule, plus one decision: keep the current consent split (SMS to those who opted in,
+        email to everyone else) or send both channels to everyone. Recommendation is to keep the
+        split — sending both is the biggest driver of SMS opt-outs, and reach is the same either way.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Section 2 · Needs work first</div>
+    <h2>Need adjusting<span class="count">4 flows</span></h2>
+  </div>
+  <p class="sub">These have live, healthy triggers and sound structure. What's wrong is the copy in
+  the flow's private clones — fixable, and fixable in place.</p>
+
+  <div class="cards">
+    <div class="card stop">
+      <div class="h">
+        <span class="t">SBD - Review Request - Service Recovery</span>
+        <span class="id">WcZM6r</span>
+        <span class="pill pill-prog">fix first</span>
+      </div>
+      <p><b>Highest priority, and the only item here with legal exposure.</b> The recovery text message
+      carries no “Reply STOP” opt-out line — every other SBD text does. Klaviyo treats this message as
+      marketing, so the line is required, and it sends to people who have just complained.</p>
+      <p>Separately, three variables in both the email and the text render as nothing, so customers
+      currently read <em>“this is&nbsp;&nbsp;from Smith Bros”</em> and <em>“Is&nbsp;&nbsp;still the best
+      way to reach you&nbsp;?”</em>. The fix is to pull the contact the customer actually typed into
+      the feedback form, fall back to their email, and name a real sender.</p>
+      <p>Trigger is live and working — three feedback-form submissions, most recent 27 July 21:47.</p>
+    </div>
+
+    <div class="card">
+      <div class="h">
+        <span class="t">SBD - Review Request</span>
+        <span class="id">Ram2QT</span>
+        <span class="pill pill-prog">fix first</span>
+      </div>
+      <p>The <b>text message</b> at the top of this flow has two dead links, so the happy/unhappy split
+      doesn't work at all — nobody gets routed to Google, and nobody gets routed to the private
+      feedback form. The emails are fine: their links point at the real feedback app and correctly
+      carry the customer's address so the form pre-fills.</p>
+    </div>
+
+    <div class="card">
+      <div class="h">
+        <span class="t">SBD - Email-to-SMS Insider Push</span>
+        <span class="id">TTnQDk</span>
+        <span class="pill pill-prog">fix first</span>
+      </div>
+      <p>All three emails have a <b>dead “Book” button</b> and all three say <b>“Smith Brothers”</b>
+      instead of “Smith Bros”. It also fires off the same list as Weekly Flash Takeover, so a new
+      subscriber can get two emails the same day — a one-day delay at the top of this flow fixes that.</p>
+      <p>Worth knowing before switching it on: the sign-up call-to-action is a phone deep link that
+      opens Messages with JOIN pre-filled. That works on mobile, which is most opens, and there's a
+      typed fallback for desktop — but a desktop reader has no way to actually subscribe. A hosted
+      sign-up form would close that.</p>
+    </div>
+
+    <div class="card">
+      <div class="h">
+        <span class="t">SBD - Post-Service</span>
+        <span class="id">WgsLB2</span>
+        <span class="pill pill-prog">fix first</span>
+      </div>
+      <p>One defect: a <b>dead “Book” button</b> in the second email. The text message and first email
+      are clean. Trigger is the healthiest in the account — 73 completed-service events on the first
+      page, most recent 28 July 17:33.</p>
+      <p>One caveat to keep in mind: it fires on <em>invoice payment</em>, not literal job completion,
+      so a prepaid job triggers the sequence early.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Section 3 · Not a copy problem</div>
+    <h2>Blocked<span class="count">2 flows</span></h2>
+  </div>
+  <p class="sub">Both of these also have dead buttons, but fixing the copy would not make them safe or
+  useful to switch on. Each is waiting on something outside Klaviyo.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Flow</th><th>Status</th><th>What's actually blocking it</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>SBD - Speed-to-Lead</b><span class="fid">YtpWPi</span></td>
+        <td><span class="tag tag-off">no audience</span></td>
+        <td>Its trigger is a Meta lead-ad form submission, and that event <b>has never once fired</b> —
+        zero events, ever. Smith Bros isn't running Meta lead ads, so the flow has no way to enrol
+        anybody. It needs a real lead source before content work on it is worth doing.</td>
+      </tr>
+      <tr>
+        <td><b>SBD - Rebook Cycle</b><span class="fid">VLSKzi</span></td>
+        <td><span class="tag tag-off">would over-message</span></td>
+        <td>Both emails have a dead “Book” button, but the deeper problem is that
+        <b>nothing in Klaviyo knows when someone books.</b> The only booking-shaped signal fires on
+        <em>invoice payment</em> — after the job is done. So a customer who books today for next
+        Tuesday keeps getting “time to rebook” emails all week. Switching this on before a
+        booking signal exists actively annoys good customers.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout">
+    <b>The one gap worth solving properly.</b> A new-booking trigger from the booking system into
+    Klaviyo is the single highest-value thing on this list. It closes the Rebook problem above, and
+    it's the only way to stop messaging anyone who has already booked but not yet been served — a
+    limitation that currently affects every promotional flow, not just Rebook.
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Section 4 · How the fixes get made</div>
+    <h2>Fix route, and why it's hands-on</h2>
+  </div>
+  <p class="sub">A constraint set for this work: <b>no flow may be renamed and no flow may change
+  identity.</b> That rules out the fastest route and settles how the work gets done.</p>
+  <ul class="plain">
+    <li><b>Rebuilding the flows is off the table.</b> The quick fix would have been to rebuild each
+    flow so Klaviyo re-copies clean content. But rebuilding always mints a new flow identity, which
+    breaks the constraint — and it would break every saved report and link that points at these
+    flows.</li>
+    <li><b>Klaviyo's interface can do all of it, in place.</b> Message copy, text bodies, exit rules
+    and the one-day delay can all be edited directly on the existing flows. Names and identities are
+    untouched. This is the route we'll take.</li>
+    <li><b>The trade-off is that it's manual</b> — 12 messages across 6 flows, plus exit rules and one
+    delay. Klaviyo's API offers no way to write flow message content, so none of this can be
+    scripted.</li>
+    <li><b>Checking the work is automated, and that matters.</b> A previous pass reported 15 templates
+    as fixed while silently writing to none of them. A verification script now re-reads the live
+    account and asserts every count in this report, so “fixed” means proven, not assumed.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Section 5 · Ownership</div>
+    <h2>Who needs to do what</h2>
+  </div>
+  <div class="two">
+    <div class="mini">
+      <h4>On us</h4>
+      <ul>
+        <li>Fix the 12 messages in place — dead buttons, recovery variables, review links, brand name.</li>
+        <li>Add the missing opt-out line to the recovery text.</li>
+        <li>Add exit rules, and the one-day delay on Insider Push.</li>
+        <li>Build the keep-subscribed confirmation page (blocks Sunset).</li>
+        <li>Build a hosted text sign-up form for desktop readers.</li>
+        <li>Write up the customer feedback form, which is live but undocumented.</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h4>Needs a decision or a dependency</h4>
+      <ul>
+        <li><b>New-booking trigger</b> into Klaviyo — unblocks Rebook and stops messaging anyone
+        already booked. Booking-system side.</li>
+        <li><b>A real lead source</b> for Speed-to-Lead — it has no audience at all today.</li>
+        <li><b>Remove the at-the-shop option</b> from the booking form; no times are ever available,
+        so it's a dead end for the customer.</li>
+        <li><b>Confirm the recovery sender name</b> — whose name should unhappy customers see, and
+        whose line do replies reach?</li>
+        <li><b>Cross-sell channels</b> — keep the consent split, or send both?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Section 6 · For the record</div>
+    <h2>Caveats and notes</h2>
+  </div>
+  <ul class="plain">
+    <li><b>One claim we could not verify.</b> An earlier audit found that six of the nine flows have no
+    exit rule at all. Klaviyo's API does not expose flow-level rules, so we could not independently
+    confirm it — it's reported here as inherited, not verified. Each rule will be confirmed visually
+    in the interface as it's added.</li>
+    <li><b>Vehicle details only work in some flows.</b> The vehicle is attached to the completed-service
+    event, not stored on the customer record — of 600 profiles sampled, none carried it. So
+    “your 2019 Tahoe” is only possible in the four event-triggered flows. The other five must keep
+    generic wording; anything else would render blank.</li>
+    <li><b>Last week's Flash campaign names don't match their send dates.</b> Four campaigns labelled
+    “Tue Jul 28” and “Wed Jul 29” all actually sent on Monday 27 July at 18:30 UTC. The names are
+    being left as they are, deliberately — this footnote is the record, so reporting isn't read wrong
+    later. The A/B comparison itself is still valid: both arms were treated identically.</li>
+    <li><b>The same send also skipped the channel stagger.</b> Text and email went out in the same
+    minute rather than text Tuesday, email Wednesday, so anyone on both lists got both at once.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Prepared by Kas &amp; Co for Smith Bros Mobile Detailing.</b> Every figure was read directly
+  from the live Klaviyo account (Sc4QpC) on 28 July 2026 and is re-checkable with
+  <code>verify-flow-readiness.sh</code>. No flow was renamed, re-identified, activated or otherwise
+  changed in producing this report — it is a read-only assessment. All nine SBD flows remain in draft.</p>
+  <p style="margin-top:10px">Confidential — prepared for Smith Bros Mobile Detailing. This link is
+  unlisted; please don't share publicly.</p>
+</footer>
+
+</div>
+</body>
+</html>
