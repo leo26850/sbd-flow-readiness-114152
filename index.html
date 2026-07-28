@@ -10,6 +10,9 @@
   KLAVIYO FLOW READINESS REPORT — Smith Bros Mobile Detailing
   ----------------------------------------------------------------------------
   Which of the 9 SBD flows can be activated, and what each one still needs.
+  UPDATED 2026-07-28 (later the same day): all 12 content defects have been FIXED
+  in place via PATCH /api/flow-actions/{id} on revision 2026-07-15 — no flow was
+  renamed, re-identified or activated. Fix script: ~/sbd/fix-flow-actions.py.
   Built on the redstone/SBD report design system (see reports/weekly/TEMPLATE.html).
 
   EVERY NUMBER HERE IS MACHINE-VERIFIED. Re-run before editing or re-publishing:
@@ -131,85 +134,161 @@ footer b { color:var(--ink2); }
   <h1>Which flows are ready to go live, and what the rest still need</h1>
   <div class="meta">
     <span>Prepared by Kas &amp; Co</span>
-    <span>Audited 28 July 2026</span>
+    <span>Audited &amp; fixed 28 July 2026</span>
     <span>Account Sc4QpC</span>
     <span>9 SBD flows · all draft</span>
   </div>
 </header>
 
 <section style="margin-top:34px">
-  <p class="lead">Nine SBD flows exist. <strong>Three are ready to activate</strong>, four need copy fixes
-  first, and two are blocked by something no amount of copy work will solve. Every flow is still in
-  <b>draft</b>, so none of the problems below has ever reached a customer.</p>
+  <p class="lead">Nine SBD flows exist. Every one of them had its content audited, and
+  <strong>all 12 broken messages have now been fixed</strong> — dead buttons, blank variables, the
+  missing text opt-out line and the wrong brand name. What remains is not copy work: five flows need
+  an exit rule set, one needs a name confirmed, one needs a delay, and two are waiting on a data
+  source outside Klaviyo. Every flow is still in <b>draft</b>, so nothing here reached a customer at
+  any point.</p>
 
   <div class="tiles">
     <div class="tile">
-      <div class="n">3</div>
-      <div class="l"><span class="dot" style="background:var(--good)"></span>Ready</div>
-      <div class="s">Content clean; needs an exit rule set</div>
-    </div>
-    <div class="tile">
-      <div class="n">4</div>
-      <div class="l"><span class="dot" style="background:var(--warn)"></span>Need adjusting</div>
-      <div class="s">Dead buttons or broken variables</div>
-    </div>
-    <div class="tile">
-      <div class="n">2</div>
-      <div class="l"><span class="dot" style="background:var(--low)"></span>Blocked</div>
-      <div class="s">Missing data, not missing copy</div>
-    </div>
-    <div class="tile">
-      <div class="n">12<span style="font-size:16px;color:var(--ink3)"> / 27</span></div>
-      <div class="l">Messages with a defect</div>
-      <div class="s">Across 6 of the 9 flows</div>
+      <div class="n">12</div>
+      <div class="l"><span class="dot" style="background:var(--good)"></span>Messages fixed</div>
+      <div class="s">All of them, verified by re-read</div>
     </div>
     <div class="tile">
       <div class="n">0</div>
-      <div class="l">Sent to a customer</div>
-      <div class="s">Every flow is still draft</div>
+      <div class="l">Content defects left</div>
+      <div class="s">Was 12 of 27 messages</div>
+    </div>
+    <div class="tile">
+      <div class="n">5</div>
+      <div class="l"><span class="dot" style="background:var(--warn)"></span>Need an exit rule</div>
+      <div class="s">Then ready to switch on</div>
+    </div>
+    <div class="tile">
+      <div class="n">2</div>
+      <div class="l"><span class="dot" style="background:var(--low)"></span>Still blocked</div>
+      <div class="s">Missing data, not missing copy</div>
+    </div>
+    <div class="tile">
+      <div class="n">0</div>
+      <div class="l">Renamed or re-identified</div>
+      <div class="s">All 9 names and IDs unchanged</div>
     </div>
   </div>
 
   <div class="callout">
-    <b>Why fixes that were already made didn't take.</b> When a message is added to a flow, Klaviyo
-    <em>clones</em> the template and the flow keeps its own private copy. Editing the original
-    afterwards changes nothing the flow sends. Earlier fix passes edited the originals — those are
-    now clean, all 25 of them — but the flow copies, which are the ones that actually go out, still
-    carry the old broken content. That single mechanic explains every defect in this report.
+    <b>What had gone wrong, and why earlier fixes hadn't taken.</b> When a message is added to a flow,
+    Klaviyo <em>clones</em> the template and the flow keeps its own private copy. Editing the original
+    afterwards changes nothing the flow sends. Earlier fix passes edited the originals, so those read
+    as clean — while the flow's copies, the ones that actually go out, still carried a dead
+    “Book” button, blank variables and the old brand name. That single mechanic explains every defect
+    found. All 12 have now been corrected on the flow copies themselves.
   </div>
 </section>
 
 <section>
   <div class="sechead">
-    <div class="eyebrow">Section 1 · Green light</div>
-    <h2>Ready to go live<span class="count">3 flows</span></h2>
+    <div class="eyebrow">Section 1 · Done today</div>
+    <h2>What was fixed<span class="count">12 messages</span></h2>
   </div>
-  <p class="sub">Content is verified clean in the copy that actually sends — no dead links, no
-  variables that render blank, brand name correct. Each still needs an exit rule so people stop
-  receiving the sequence once they've acted.</p>
+  <p class="sub">Each change was made directly on the existing flows. Nothing was rebuilt, renamed or
+  switched on, and every write was confirmed by reading the message back afterwards.</p>
   <div class="tablewrap">
   <table>
-    <thead><tr><th>Flow</th><th>Status</th><th>Before switching on</th></tr></thead>
+    <thead><tr><th>What was wrong</th><th>Where</th><th>Now</th></tr></thead>
     <tbody>
       <tr>
-        <td><b>SBD - Sunset and Re-permission</b><span class="fid">SF9vm6 · list-triggered</span></td>
-        <td><span class="tag tag-on">clean</span></td>
-        <td>Exit rule (came-back-and-engaged). The disengagement window has already been widened from
-        90 to 150 days and reads back correctly — 2,608 profiles. Also needs the
-        <b>keep-subscribed confirmation page</b>, which doesn't exist yet; today the button has
-        nowhere to land.</td>
+        <td><b>Text message had no opt-out line</b><br><span style="color:var(--ink2)">Required on a
+        marketing text, and this one goes to people who have just complained.</span></td>
+        <td>Service Recovery text</td>
+        <td>House line added: <em>“Reply STOP to opt out, HELP for help.”</em> Now present on all
+        eight texts.</td>
       </tr>
       <tr>
-        <td><b>SBD - Weekly Flash Takeover</b><span class="fid">U8yB9P · list-triggered</span></td>
-        <td><span class="tag tag-on">clean</span></td>
-        <td>Exit rule only (don't promote someone mid-job). Links verified real.</td>
+        <td><b>Dead “Book” button</b><br><span style="color:var(--ink2)">Pointed at a variable that
+        doesn't exist, so the button linked nowhere.</span></td>
+        <td>9 emails across Insider Push, Post-Service, Rebook and Speed-to-Lead</td>
+        <td>Real booking link. On Insider Push it became the text-signup link instead, which is what
+        that email is actually for.</td>
       </tr>
       <tr>
-        <td><b>SBD - Service Cross-sell</b><span class="fid">XCqfUN · Service&nbsp;Completed</span></td>
+        <td><b>Review links dead</b><br><span style="color:var(--ink2)">Both options in the text were
+        empty, so the happy/unhappy split did nothing at all.</span></td>
+        <td>Review Request first text</td>
+        <td>Both point at the live feedback app, matching what the emails already used.</td>
+      </tr>
+      <tr>
+        <td><b>Three blank variables</b><br><span style="color:var(--ink2)">Customers would have read
+        “this is&nbsp;&nbsp;from Smith Bros” and “Is&nbsp;&nbsp;still the best way to reach
+        you&nbsp;?”</span></td>
+        <td>Service Recovery email and text</td>
+        <td>Named sender, and the contact the customer typed into the feedback form, falling back to
+        their email.</td>
+      </tr>
+      <tr>
+        <td><b>“Smith Brothers”</b><br><span style="color:var(--ink2)">Brand is “Smith Bros”.</span></td>
+        <td>4 emails</td>
+        <td>Corrected.</td>
+      </tr>
+      <tr>
+        <td><b>Vehicle showed as the word “vehicle”</b><br><span style="color:var(--ink2)">It was
+        reading a field that doesn't exist on customer records.</span></td>
+        <td>Post-Service and Cross-sell texts</td>
+        <td>Now reads the real vehicle from the service record, where one exists.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout">
+    <b>Checked, not assumed.</b> A previous attempt at this reported fifteen messages as fixed while
+    silently writing to none of them. Every change above was verified by reading the message back from
+    Klaviyo afterwards, and a script re-checks all of it on demand.
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <div class="eyebrow">Section 2 · Green light</div>
+    <h2>Ready once an exit rule is set<span class="count">5 flows</span></h2>
+  </div>
+  <p class="sub">Content on all five is clean and verified. Each needs a rule that stops the sequence
+  once someone has acted — otherwise a customer who books on day three keeps getting the rest of the
+  emails.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Flow</th><th>Content</th><th>Remaining</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>SBD - Post-Service</b><span class="fid">WgsLB2</span></td>
         <td><span class="tag tag-on">clean</span></td>
-        <td>Exit rule, plus one decision: keep the current consent split (SMS to those who opted in,
-        email to everyone else) or send both channels to everyone. Recommendation is to keep the
-        split — sending both is the biggest driver of SMS opt-outs, and reach is the same either way.</td>
+        <td>Exit rule. Trigger is the healthiest in the account — 74 completed services on the first
+        page, most recent 28 July 18:34. Note it fires on invoice payment, so a prepaid job starts the
+        sequence early.</td>
+      </tr>
+      <tr>
+        <td><b>SBD - Review Request</b><span class="fid">Ram2QT</span></td>
+        <td><span class="tag tag-on">clean</span></td>
+        <td>Already excludes unhappy customers; add an exclusion for anyone who has filled in the
+        feedback form.</td>
+      </tr>
+      <tr>
+        <td><b>SBD - Sunset and Re-permission</b><span class="fid">SF9vm6</span></td>
+        <td><span class="tag tag-on">clean</span></td>
+        <td>Exit rule, plus the <b>keep-subscribed confirmation page</b>, which doesn't exist yet —
+        today that button has nowhere to land. Disengagement window already widened from 90 to 150
+        days: 2,608 profiles.</td>
+      </tr>
+      <tr>
+        <td><b>SBD - Weekly Flash Takeover</b><span class="fid">U8yB9P</span></td>
+        <td><span class="tag tag-on">clean</span></td>
+        <td>Exit rule only — don't promote someone mid-job.</td>
+      </tr>
+      <tr>
+        <td><b>SBD - Service Cross-sell</b><span class="fid">XCqfUN</span></td>
+        <td><span class="tag tag-on">clean</span></td>
+        <td>Exit rule, plus one decision: keep the current split (text to those who opted in, email to
+        everyone else) or send both to everyone. Recommendation is to keep the split — sending both is
+        the biggest driver of text opt-outs and reach is the same either way.</td>
       </tr>
     </tbody>
   </table>
@@ -218,78 +297,45 @@ footer b { color:var(--ink2); }
 
 <section>
   <div class="sechead">
-    <div class="eyebrow">Section 2 · Needs work first</div>
-    <h2>Need adjusting<span class="count">4 flows</span></h2>
+    <div class="eyebrow">Section 3 · One step short</div>
+    <h2>Nearly there<span class="count">2 flows</span></h2>
   </div>
-  <p class="sub">These have live, healthy triggers and sound structure. What's wrong is the copy in
-  the flow's private clones — fixable, and fixable in place.</p>
-
   <div class="cards">
-    <div class="card stop">
+    <div class="card">
       <div class="h">
         <span class="t">SBD - Review Request - Service Recovery</span>
         <span class="id">WcZM6r</span>
-        <span class="pill pill-prog">fix first</span>
+        <span class="pill pill-prog">confirm a name</span>
       </div>
-      <p><b>Highest priority, and the only item here with legal exposure.</b> The recovery text message
-      carries no “Reply STOP” opt-out line — every other SBD text does. Klaviyo treats this message as
-      marketing, so the line is required, and it sends to people who have just complained.</p>
-      <p>Separately, three variables in both the email and the text render as nothing, so customers
-      currently read <em>“this is&nbsp;&nbsp;from Smith Bros”</em> and <em>“Is&nbsp;&nbsp;still the best
-      way to reach you&nbsp;?”</em>. The fix is to pull the contact the customer actually typed into
-      the feedback form, fall back to their email, and name a real sender.</p>
-      <p>Trigger is live and working — three feedback-form submissions, most recent 27 July 21:47.</p>
+      <p>Content is fixed, including the opt-out line that was missing. The email and text now both
+      introduce the sender by name — currently <b>Luke</b>, carried over from an earlier decision that
+      replies route to his line. <b>Please confirm that's right</b>, because it's the first thing an
+      unhappy customer reads and it's the only thing standing between this flow and going live.</p>
+      <p>Deliberately has no exit rule: this flow exists to reach exactly the people any suppression
+      rule would filter out.</p>
     </div>
-
-    <div class="card">
-      <div class="h">
-        <span class="t">SBD - Review Request</span>
-        <span class="id">Ram2QT</span>
-        <span class="pill pill-prog">fix first</span>
-      </div>
-      <p>The <b>text message</b> at the top of this flow has two dead links, so the happy/unhappy split
-      doesn't work at all — nobody gets routed to Google, and nobody gets routed to the private
-      feedback form. The emails are fine: their links point at the real feedback app and correctly
-      carry the customer's address so the form pre-fills.</p>
-    </div>
-
     <div class="card">
       <div class="h">
         <span class="t">SBD - Email-to-SMS Insider Push</span>
         <span class="id">TTnQDk</span>
-        <span class="pill pill-prog">fix first</span>
+        <span class="pill pill-prog">needs a delay</span>
       </div>
-      <p>All three emails have a <b>dead “Book” button</b> and all three say <b>“Smith Brothers”</b>
-      instead of “Smith Bros”. It also fires off the same list as Weekly Flash Takeover, so a new
-      subscriber can get two emails the same day — a one-day delay at the top of this flow fixes that.</p>
-      <p>Worth knowing before switching it on: the sign-up call-to-action is a phone deep link that
-      opens Messages with JOIN pre-filled. That works on mobile, which is most opens, and there's a
-      typed fallback for desktop — but a desktop reader has no way to actually subscribe. A hosted
-      sign-up form would close that.</p>
-    </div>
-
-    <div class="card">
-      <div class="h">
-        <span class="t">SBD - Post-Service</span>
-        <span class="id">WgsLB2</span>
-        <span class="pill pill-prog">fix first</span>
-      </div>
-      <p>One defect: a <b>dead “Book” button</b> in the second email. The text message and first email
-      are clean. Trigger is the healthiest in the account — 73 completed-service events on the first
-      page, most recent 28 July 17:33.</p>
-      <p>One caveat to keep in mind: it fires on <em>invoice payment</em>, not literal job completion,
-      so a prepaid job triggers the sequence early.</p>
+      <p>All three emails are fixed — working text-signup link, brand corrected, and they now carry the
+      “reading this on a computer?” fallback line. Two things left. It fires off the same list as Weekly
+      Flash Takeover, so a new subscriber can get two emails the same day; a <b>one-day delay</b> at the
+      top solves that. And while the fallback line tells a desktop reader what to text, there's still no
+      way to actually subscribe from a computer — a <b>hosted sign-up form</b> would close that.</p>
     </div>
   </div>
 </section>
 
 <section>
   <div class="sechead">
-    <div class="eyebrow">Section 3 · Not a copy problem</div>
-    <h2>Blocked<span class="count">2 flows</span></h2>
+    <div class="eyebrow">Section 4 · Not a copy problem</div>
+    <h2>Still blocked<span class="count">2 flows</span></h2>
   </div>
-  <p class="sub">Both of these also have dead buttons, but fixing the copy would not make them safe or
-  useful to switch on. Each is waiting on something outside Klaviyo.</p>
+  <p class="sub">Both now have clean content, but neither should be switched on. Each is waiting on
+  something outside Klaviyo.</p>
   <div class="tablewrap">
   <table>
     <thead><tr><th>Flow</th><th>Status</th><th>What's actually blocking it</th></tr></thead>
@@ -299,80 +345,77 @@ footer b { color:var(--ink2); }
         <td><span class="tag tag-off">no audience</span></td>
         <td>Its trigger is a Meta lead-ad form submission, and that event <b>has never once fired</b> —
         zero events, ever. Smith Bros isn't running Meta lead ads, so the flow has no way to enrol
-        anybody. It needs a real lead source before content work on it is worth doing.</td>
+        anybody. It needs a real lead source before switching it on means anything.</td>
       </tr>
       <tr>
         <td><b>SBD - Rebook Cycle</b><span class="fid">VLSKzi</span></td>
         <td><span class="tag tag-off">would over-message</span></td>
-        <td>Both emails have a dead “Book” button, but the deeper problem is that
-        <b>nothing in Klaviyo knows when someone books.</b> The only booking-shaped signal fires on
-        <em>invoice payment</em> — after the job is done. So a customer who books today for next
-        Tuesday keeps getting “time to rebook” emails all week. Switching this on before a
-        booking signal exists actively annoys good customers.</td>
+        <td><b>Nothing in Klaviyo knows when someone books.</b> The only booking-shaped signal fires on
+        <em>invoice payment</em> — after the job is done. So a customer who books today for next Tuesday
+        keeps getting “time to rebook” emails all week. Switching this on before a booking signal
+        exists actively annoys good customers.</td>
       </tr>
     </tbody>
   </table>
   </div>
   <div class="callout">
     <b>The one gap worth solving properly.</b> A new-booking trigger from the booking system into
-    Klaviyo is the single highest-value thing on this list. It closes the Rebook problem above, and
-    it's the only way to stop messaging anyone who has already booked but not yet been served — a
-    limitation that currently affects every promotional flow, not just Rebook.
+    Klaviyo is the highest-value item on this list. It closes the Rebook problem above, and it's the
+    only way to stop messaging anyone who has already booked but not yet been served — a limitation
+    that affects every promotional flow, not just Rebook.
   </div>
 </section>
 
 <section>
   <div class="sechead">
-    <div class="eyebrow">Section 4 · How the fixes get made</div>
-    <h2>Fix route, and why it's hands-on</h2>
+    <div class="eyebrow">Section 5 · How it was done</div>
+    <h2>Fixed in place, nothing rebuilt</h2>
   </div>
-  <p class="sub">A constraint set for this work: <b>no flow may be renamed and no flow may change
-  identity.</b> That rules out the fastest route and settles how the work gets done.</p>
+  <p class="sub">A constraint was set for this work: <b>no flow may be renamed and no flow may change
+  identity.</b> That ruled out the obvious route and turned out to lead somewhere better.</p>
   <ul class="plain">
-    <li><b>Rebuilding the flows is off the table.</b> The quick fix would have been to rebuild each
-    flow so Klaviyo re-copies clean content. But rebuilding always mints a new flow identity, which
-    breaks the constraint — and it would break every saved report and link that points at these
-    flows.</li>
-    <li><b>Klaviyo's interface can do all of it, in place.</b> Message copy, text bodies, exit rules
-    and the one-day delay can all be edited directly on the existing flows. Names and identities are
-    untouched. This is the route we'll take.</li>
-    <li><b>The trade-off is that it's manual</b> — 12 messages across 6 flows, plus exit rules and one
-    delay. Klaviyo's API offers no way to write flow message content, so none of this can be
-    scripted.</li>
-    <li><b>Checking the work is automated, and that matters.</b> A previous pass reported 15 templates
-    as fixed while silently writing to none of them. A verification script now re-reads the live
-    account and asserts every count in this report, so “fixed” means proven, not assumed.</li>
+    <li><b>Rebuilding was off the table.</b> The original plan was to rebuild each flow so Klaviyo
+    re-copies clean content. But rebuilding always mints a new flow identity, which would break every
+    saved report and link pointing at these flows.</li>
+    <li><b>It turned out the flows could be edited directly instead.</b> A newer version of Klaviyo's
+    interface allows the message content of an existing flow to be updated in place. So the fixes were
+    applied to the live flows themselves — names, identities and draft status all untouched, and
+    confirmed afterwards: all nine names byte-identical, all nine IDs unchanged, all nine still
+    draft.</li>
+    <li><b>Everything was backed up first</b>, and every single write was proven by reading the
+    message back rather than trusting that the change had gone through.</li>
+    <li><b>Nothing was activated.</b> No message has been sent, and no flow was taken out of
+    draft.</li>
   </ul>
 </section>
 
 <section>
   <div class="sechead">
-    <div class="eyebrow">Section 5 · Ownership</div>
-    <h2>Who needs to do what</h2>
+    <div class="eyebrow">Section 6 · Ownership</div>
+    <h2>Who needs to do what next</h2>
   </div>
   <div class="two">
     <div class="mini">
       <h4>On us</h4>
       <ul>
-        <li>Fix the 12 messages in place — dead buttons, recovery variables, review links, brand name.</li>
-        <li>Add the missing opt-out line to the recovery text.</li>
-        <li>Add exit rules, and the one-day delay on Insider Push.</li>
-        <li>Build the keep-subscribed confirmation page (blocks Sunset).</li>
+        <li>Add exit rules to the five flows in Section 2, and the one-day delay on Insider Push.</li>
+        <li>Build the keep-subscribed confirmation page — blocks Sunset.</li>
         <li>Build a hosted text sign-up form for desktop readers.</li>
         <li>Write up the customer feedback form, which is live but undocumented.</li>
+        <li><s>Fix the 12 broken messages.</s> <b>Done 28 July.</b></li>
       </ul>
     </div>
     <div class="mini">
       <h4>Needs a decision or a dependency</h4>
       <ul>
+        <li><b>Confirm the recovery sender name</b> — currently “Luke”. Only thing holding Service
+        Recovery back.</li>
         <li><b>New-booking trigger</b> into Klaviyo — unblocks Rebook and stops messaging anyone
         already booked. Booking-system side.</li>
         <li><b>A real lead source</b> for Speed-to-Lead — it has no audience at all today.</li>
         <li><b>Remove the at-the-shop option</b> from the booking form; no times are ever available,
         so it's a dead end for the customer.</li>
-        <li><b>Confirm the recovery sender name</b> — whose name should unhappy customers see, and
-        whose line do replies reach?</li>
-        <li><b>Cross-sell channels</b> — keep the consent split, or send both?</li>
+        <li><b>Cross-sell channels</b> — keep the split, or send both?</li>
       </ul>
     </div>
   </div>
@@ -380,22 +423,22 @@ footer b { color:var(--ink2); }
 
 <section>
   <div class="sechead">
-    <div class="eyebrow">Section 6 · For the record</div>
+    <div class="eyebrow">Section 7 · For the record</div>
     <h2>Caveats and notes</h2>
   </div>
   <ul class="plain">
     <li><b>One claim we could not verify.</b> An earlier audit found that six of the nine flows have no
-    exit rule at all. Klaviyo's API does not expose flow-level rules, so we could not independently
-    confirm it — it's reported here as inherited, not verified. Each rule will be confirmed visually
-    in the interface as it's added.</li>
+    exit rule at all. Klaviyo's interface does not expose those rules to us programmatically, so we
+    could not independently confirm it — it's reported here as inherited, not verified. Each rule will
+    be confirmed visually as it's added.</li>
     <li><b>Vehicle details only work in some flows.</b> The vehicle is attached to the completed-service
-    event, not stored on the customer record — of 600 profiles sampled, none carried it. So
-    “your 2019 Tahoe” is only possible in the four event-triggered flows. The other five must keep
-    generic wording; anything else would render blank.</li>
+    record, not stored on the customer — of 600 customers sampled, none carried it. So a specific
+    vehicle can only appear in the four flows triggered by a service; the other five keep generic
+    wording, because anything else would render blank. The fixes respect that split.</li>
     <li><b>Last week's Flash campaign names don't match their send dates.</b> Four campaigns labelled
-    “Tue Jul 28” and “Wed Jul 29” all actually sent on Monday 27 July at 18:30 UTC. The names are
-    being left as they are, deliberately — this footnote is the record, so reporting isn't read wrong
-    later. The A/B comparison itself is still valid: both arms were treated identically.</li>
+    “Tue Jul 28” and “Wed Jul 29” all actually sent on Monday 27 July at 18:30 UTC. The names are being
+    left as they are, deliberately — this footnote is the record, so reporting isn't read wrong later.
+    The A/B comparison itself is still valid: both arms were treated identically.</li>
     <li><b>The same send also skipped the channel stagger.</b> Text and email went out in the same
     minute rather than text Tuesday, email Wednesday, so anyone on both lists got both at once.</li>
   </ul>
@@ -404,8 +447,10 @@ footer b { color:var(--ink2); }
 <footer>
   <p><b>Prepared by Kas &amp; Co for Smith Bros Mobile Detailing.</b> Every figure was read directly
   from the live Klaviyo account (Sc4QpC) on 28 July 2026 and is re-checkable with
-  <code>verify-flow-readiness.sh</code>. No flow was renamed, re-identified, activated or otherwise
-  changed in producing this report — it is a read-only assessment. All nine SBD flows remain in draft.</p>
+  <code>verify-flow-readiness.sh</code>. The 12 content fixes were applied the same day with
+  <code>fix-flow-actions.py</code>, after a full backup, and each was verified by reading the message
+  back. No flow was renamed, re-identified, activated or sent from. All nine SBD flows remain in
+  draft.</p>
   <p style="margin-top:10px">Confidential — prepared for Smith Bros Mobile Detailing. This link is
   unlisted; please don't share publicly.</p>
 </footer>
